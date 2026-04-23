@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-inter: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-brand-purple: #6C63FF;
+  --color-brand-lavender: #A78BFA;
+  --color-brand-rose: #F472B6;
+  
+  /* Theme variables mapped to Tailwind colors */
+  --color-bg-deep: var(--bg-deep);
+  --color-bg-card: var(--bg-card);
+  --color-text-main: var(--text-main);
+  --color-text-dim: var(--text-dim);
+  --color-panel-border: var(--panel-border);
+  --color-chat-ai: var(--chat-ai);
+}
+
+:root {
+  /* Default: Dark Mode */
+  --bg-deep: #0D0F1A;
+  --bg-card: #161927;
+  --text-main: #FFFFFF;
+  --text-dim: #A0AEC0;
+  --panel-border: rgba(255, 255, 255, 0.05);
+  --chat-ai: rgba(22, 25, 39, 0.9);
+}
+
+[data-theme='light'] {
+  --bg-deep: #F8F9FF;
+  --bg-card: #FFFFFF;
+  --text-main: #1A1A2E;
+  --text-dim: #6B7280;
+  --panel-border: rgba(108, 99, 255, 0.1);
+  --chat-ai: #EEF0FF;
+}
+
+@layer base {
+  body {
+    @apply bg-bg-deep text-text-main font-inter antialiased transition-colors duration-300 overflow-x-hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-bg-deep;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-brand-purple/20 rounded-full hover:bg-brand-purple transition-all;
+  }
+}
+
+@layer components {
+  .panel-glass {
+    @apply bg-bg-card border border-panel-border rounded-3xl shadow-2xl transition-all duration-300;
+    /* Adjust glass effect based on theme if needed, but keeping it clean as requested */
+  }
+
+  [data-theme='dark'] .panel-glass {
+    @apply bg-bg-card/90 backdrop-blur-xl;
+  }
+
+  .panel-glow {
+    @apply border border-brand-purple/10 shadow-[0_0_20px_rgba(108,99,255,0.05)];
+  }
+
+  .btn-premium {
+    @apply bg-gradient-to-r from-brand-purple to-brand-lavender text-white font-bold rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(108,99,255,0.4)] active:scale-95 disabled:opacity-50 disabled:grayscale;
+  }
+
+  .chip-premium {
+    @apply bg-white/5 border border-panel-border px-3 py-1.5 rounded-xl transition-all duration-300 hover:bg-white/10 hover:border-brand-purple/40 hover:shadow-[0_0_15px_rgba(108,99,255,0.15)] flex items-center gap-2;
+  }
+
+  [data-theme='light'] .chip-premium {
+    @apply bg-white border-brand-purple/20;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-purple to-brand-lavender bg-clip-text text-transparent;
+  }
+}
+
+
